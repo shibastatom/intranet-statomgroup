@@ -15666,4 +15666,8 @@ body.understrap-no-sidebar .wp-block-cover.alignwide {
   border: 1px solid #e9ecef;
 }
 
+.page-header-section {
+  min-height: 80vh;
+}
+
 /*# sourceMappingURL=child-theme.css.map */
