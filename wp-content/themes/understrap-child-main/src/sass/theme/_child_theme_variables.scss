@@ -1,0 +1,221 @@
+// Custom Bootstrap variable overrides
+$purple: #5533ff; // Example of changing a Bootstrap variable
+$primary: $purple;
+
+
+body {
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+
+#main-nav {
+	margin: 2em auto;
+}
+
+#main-nav .container{
+	display: flex;
+	flex-direction: column;
+}
+
+.body-overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 0;
+}
+
+#main-menu {
+	.menu-item {
+		margin-right: 1rem;
+
+		.nav-link {
+			color: #fff;
+		}
+	}
+}
+
+
+.statom-intranet-notifications{
+	.container{
+		background: #1d1f1f;
+		color: #fff;
+		position: relative;
+		z-index: 1;
+		padding: 20px;
+	}
+
+	&__content{
+		display: flex;
+		justify-content: space-between;
+
+		svg{
+			height: 25px;
+			width: 25px;
+			path{
+				fill: #fff;
+			}
+		}
+	}
+}
+
+.statom-intranet-actions {
+	position: relative;
+	z-index: 1;
+	margin-top: 2em;
+
+	.container {
+		display: flex;
+		gap: 20px;
+	}
+
+	&__featured-image{
+		margin-bottom: 1rem;
+	}
+
+	&__left-actions {
+		background: #1D1F1F;
+		padding: 20px;
+		flex: .8;
+	}
+
+	&__right-actions {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 20px;
+		flex: .2;
+		sbg{
+			margin-top: -60px;
+		}
+
+		.statom-intranet-actions__action-icon{
+			position: absolute;
+			top: 30px;
+			right: 20px;
+		}
+	}
+
+	&__news-box{
+		color: #fff;
+		text-decoration: none;
+    	display: flex;
+    	align-items: flex-end;
+
+    	h3{
+    		font-weight: 400;
+    	}
+	}
+
+	&__btn {
+		display: flex;
+		gap: 30px;
+		width: 100%;
+		justify-content: space-between;
+		max-width: 8ch;
+	}
+
+	&__latest-news{
+		a{
+			display: flex;
+			font-size: 1rem;
+			margin-top: 1rem;
+			color: #fff;
+			text-decoration: none;
+			gap: 16px;
+		}
+		a:hover{
+			color: #fff;
+		}
+	}
+
+	&__action-box {
+		background: #1D1F1F;
+		height: 250px;
+		width: 190px;
+		color: #fff;
+		padding: 1.2em;
+		text-decoration: none;
+		font-size: 25px;
+		position: relative;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+
+	&__action-icon {
+		svg {
+			height: 25px;
+			width: 25px;
+			background: #FAA501;
+			border-radius: 50%;
+		}
+	}
+}
+
+.navbar-toggler:focus{
+	box-shadow: none !important;
+}
+
+@media screen and (max-width: 768px){
+	.navbar-collapse{
+		background: #1d1f1f;
+		padding: 10px 20px;
+		margin-top: 16px;
+
+		.nav-link{
+			border-bottom: 1px solid rgba(255,255, 255,.5);
+			:last-child{
+				border-bottom: none;
+			}
+		}
+	}
+
+	.statom-intranet-actions__action-box{
+		height: 200px;
+	}
+
+	#main-nav .container{
+		flex-direction: row;
+	}
+}
+
+@media screen and (max-width: 1400px){
+	.statom-intranet-actions .container{
+		flex-direction: column;
+	}
+
+	.statom-intranet-actions__news-box{
+		display: block;
+	}
+
+	.statom-intranet-actions__left-actions img{
+		width: 100%;
+	}
+
+	.statom-intranet-actions__right-actions{
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.statom-intranet-actions__action-box{
+		width: 100%;
+	}
+
+	.navbar-brand svg{
+		max-width: 250px;
+	}
+}
+
+
+
+
+
+
+
+
+
