@@ -17,12 +17,11 @@ $container = get_theme_mod( 'understrap_container_type' );
     <?php get_template_part( 'global-templates/page-header' ); ?>
 
     <!-- MAIN CONTENT -->
-    <div class="section vstack border-bottom border-4 border-primary justify-center py-3 sm:py-6 lg:py-9"<?php if ( $page_header_style ) : ?> style="<?php echo esc_attr( $page_header_style ); ?>"<?php endif; ?>>
+    <div class="section bg-dark vstack border-bottom border-4 border-primary justify-center py-3 sm:py-6 lg:py-9"<?php if ( $page_header_style ) : ?> style="<?php echo esc_attr( $page_header_style ); ?>"<?php endif; ?>>
         <div class="container max-w-xl">
             <div class="panel">
-                <div class="page-header vstack items-center">
-                    <h2 class="h4 lg:h1">ONE TEAM. MANY PATHS</h2>
-                    <p class="fs-6 lg:fs-5 opacity-60">Subcopy to be here</p>
+                <div class="page-header vstack items-center mb-4">
+                    <h2 class="h4 lg:h1 bg-primary p-2 text-black">ONE TEAM. MANY PATHS</h2>
                 </div>
 
                 <?php if ( have_rows( 'testimonials', 'option' ) ) : ?>
@@ -50,7 +49,7 @@ $container = get_theme_mod( 'understrap_container_type' );
                                 <article
                                     class=" testimonial-card ratio ratio-1x1 overflow-hidden rounded-3 <?php echo $image_url ? 'text-white bg-dark' : 'text-dark bg-white'; ?>"
                                     <?php if ( $image_url ) : ?>
-                                        style="background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('<?php echo esc_url( $image_url ); ?>'); background-position: center; background-size: cover;"
+                                        style="background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.99)), url('<?php echo esc_url( $image_url ); ?>'); background-position: center; background-size: cover;"
                                     <?php endif; ?>
                                 >
                                     <div class="d-flex flex-column justify-content-end vstack gap-3 p-3 lg:p-4 d-flex flex-column justify-content-end">
