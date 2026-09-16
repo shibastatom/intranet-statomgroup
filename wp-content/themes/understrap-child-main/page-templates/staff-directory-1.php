@@ -69,22 +69,28 @@ $staff = get_staff_data();
         width: 100%;
         border-collapse: collapse;
         font-size: 0.95rem;
+        color: white;
     }
 
     .staff-directory th,
     .staff-directory td {
         padding: 0.6rem 0.9rem;
         text-align: left;
-        border: 1px solid #ddd;
+        /* border: 1px solid #ddd; */
     }
 
     .staff-directory thead th {
-        background-color: #f3f3f3;
+        /* background-color: #f3f3f3; */
         font-weight: 600;
     }
 
+    .staff-directory tbody tr {
+        /* background-color: lightblue; */
+        background-color: rgba(25, 25, 25, 0.9);
+    }
     .staff-directory tbody tr:nth-child(even) {
-        background-color: #fafafa;
+        /* background-color: #191919; */
+        background-color: rgba(25, 25, 25, 1);
     }
 
     .staff-directory tbody tr:hover {
@@ -93,23 +99,25 @@ $staff = get_staff_data();
 </style>
 
  <!-- Wrapper start -->
-        <div id="wrapper" class="wrap overflow-hidden-x">
+        <div id="wrapper" class="wrap overflow-hidden-x dark:text-white dark:bg-gray-900">
             <div class="section py-4 lg:py-6 xl:py-8">
                 <div class="container max-w-lg">
                     <div class="panel vstack gap-4 lg:gap-6 xl:gap-8">
-                        <header class="shop-header panel vstack justify-center gap-2 lg:gap-4 text-center">
+                        <div class="shop-header panel vstack justify-center gap-2 lg:gap-4 text-center">
                             <div class="panel">
                                 <h1 class="h3 lg:h1">Staff Directory 1 Template</h1>
                                 <p>Last updated: <?php echo esc_html( date_i18n( 'j F Y, g:i a', filemtime( __FILE__ ) ) ); ?></p>
                                 <p class="fs-6 sm:fs-5 opacity-60">This is a simple staff directory template.</p>
                             </div>
-                        </header>
+                        </div>
                     </div>
                 </div>
                 <div class="container max-w-lg">
                     <!-- table to be here -->
-                     <table class="staff-directory">
-                        <thead>
+                    <table 
+                    class="staff-directory table align-middle overflow-auto m-0 fs-6 dark:text-white dark:border-gray-700"
+                    >
+                        <thead class="sticky-top ft-secondary bg-black text-yellow z-1">
                             <tr>
                                 <th>Full Name</th>
                                 <th>Company</th>
