@@ -61,6 +61,17 @@ function get_staff_data() {
 
 <?php
 $staff = get_staff_data();
+
+function get_staff_filter_options( $staff, $column ) {
+    $values = array_filter( array_unique( array_column( $staff, $column ) ) );
+    sort( $values );
+    return $values;
+}
+
+$staff_companies   = get_staff_filter_options( $staff, 'Company' );
+$staff_job_titles  = get_staff_filter_options( $staff, 'Job Title' );
+$staff_departments = get_staff_filter_options( $staff, 'Department' );
+$staff_locations   = get_staff_filter_options( $staff, 'Location' );
 ?>
 
 
@@ -112,6 +123,22 @@ $staff = get_staff_data();
     .staff-directory-search::placeholder {
         color: #aaa;
     }
+
+    .staff-directory-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .staff-directory-filters select {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.95rem;
+        color: white;
+        background-color: rgba(25, 25, 25, 0.9);
+        border: 1px solid #444;
+        border-radius: 4px;
+    }
 </style>
 
  <!-- Wrapper start -->
@@ -137,6 +164,36 @@ $staff = get_staff_data();
                         aria-label="Search staff directory"
                     >
 
+                    <div class="staff-directory-filters">
+                        <select id="staff-directory-filter-company" aria-label="Filter by company">
+                            <option value="">All Companies</option>
+                            <?php foreach ( $staff_companies as $company ) : ?>
+                                <option value="<?php echo esc_attr( $company ); ?>"><?php echo esc_html( $company ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <select id="staff-directory-filter-job-title" aria-label="Filter by job title">
+                            <option value="">All Job Titles</option>
+                            <?php foreach ( $staff_job_titles as $job_title ) : ?>
+                                <option value="<?php echo esc_attr( $job_title ); ?>"><?php echo esc_html( $job_title ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <select id="staff-directory-filter-department" aria-label="Filter by department">
+                            <option value="">All Departments</option>
+                            <?php foreach ( $staff_departments as $department ) : ?>
+                                <option value="<?php echo esc_attr( $department ); ?>"><?php echo esc_html( $department ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <select id="staff-directory-filter-location" aria-label="Filter by location">
+                            <option value="">All Locations</option>
+                            <?php foreach ( $staff_locations as $location ) : ?>
+                                <option value="<?php echo esc_attr( $location ); ?>"><?php echo esc_html( $location ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <!-- table to be here -->
                     <table
                     id="staff-directory-table"
@@ -158,7 +215,12 @@ $staff = get_staff_data();
                                 <tr><td colspan="7">Staff data is currently unavailable.</td></tr>
                             <?php else : ?>
                                 <?php foreach ( $staff as $person ) : ?>
-                                    <tr>
+                                    <tr
+                                        data-company="<?php echo esc_attr( $person['Company'] ?? '' ); ?>"
+                                        data-job-title="<?php echo esc_attr( $person['Job Title'] ?? '' ); ?>"
+                                        data-department="<?php echo esc_attr( $person['Department'] ?? '' ); ?>"
+                                        data-location="<?php echo esc_attr( $person['Location'] ?? '' ); ?>"
+                                    >
                                         <td><?php echo esc_html( $person['Full Name'] ?? '' ); ?></td>
                                         <td><?php echo esc_html( $person['Company'] ?? '' ); ?></td>
                                         <td><?php echo esc_html( $person['Job Title'] ?? '' ); ?></td>
@@ -196,12 +258,29 @@ $staff = get_staff_data();
                 function ( row ) { return row !== noResultsRow; }
             );
 
-            searchInput.addEventListener( 'input', function () {
+            var filterSelects = {
+                company: document.getElementById( 'staff-directory-filter-company' ),
+                jobTitle: document.getElementById( 'staff-directory-filter-job-title' ),
+                department: document.getElementById( 'staff-directory-filter-department' ),
+                location: document.getElementById( 'staff-directory-filter-location' )
+            };
+
+            function applyFilters() {
                 var query = searchInput.value.trim().toLowerCase();
+                var company = filterSelects.company ? filterSelects.company.value : '';
+                var jobTitle = filterSelects.jobTitle ? filterSelects.jobTitle.value : '';
+                var department = filterSelects.department ? filterSelects.department.value : '';
+                var location = filterSelects.location ? filterSelects.location.value : '';
                 var visibleCount = 0;
 
                 rows.forEach( function ( row ) {
-                    var matches = row.textContent.toLowerCase().indexOf( query ) !== -1;
+                    var matchesSearch = row.textContent.toLowerCase().indexOf( query ) !== -1;
+                    var matchesCompany = ! company || row.dataset.company === company;
+                    var matchesJobTitle = ! jobTitle || row.dataset.jobTitle === jobTitle;
+                    var matchesDepartment = ! department || row.dataset.department === department;
+                    var matchesLocation = ! location || row.dataset.location === location;
+
+                    var matches = matchesSearch && matchesCompany && matchesJobTitle && matchesDepartment && matchesLocation;
                     row.hidden = ! matches;
                     if ( matches ) {
                         visibleCount++;
@@ -210,6 +289,13 @@ $staff = get_staff_data();
 
                 if ( noResultsRow ) {
                     noResultsRow.hidden = visibleCount !== 0;
+                }
+            }
+
+            searchInput.addEventListener( 'input', applyFilters );
+            Object.keys( filterSelects ).forEach( function ( key ) {
+                if ( filterSelects[ key ] ) {
+                    filterSelects[ key ].addEventListener( 'change', applyFilters );
                 }
             } );
         })();
