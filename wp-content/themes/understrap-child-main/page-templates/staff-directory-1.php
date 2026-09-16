@@ -14,27 +14,6 @@ get_header();
 $container = get_theme_mod( 'understrap_container_type' );
 ?>
 
- <!-- Wrapper start -->
-        <div id="wrapper" class="wrap overflow-hidden-x">
-            <div class="section py-4 lg:py-6 xl:py-8">
-                <div class="container max-w-lg">
-                    <div class="panel vstack gap-4 lg:gap-6 xl:gap-8">
-                        <header class="shop-header panel vstack justify-center gap-2 lg:gap-4 text-center">
-                            <div class="panel">
-                                <h1 class="h3 lg:h1">Staff Directory 1 Template</h1>
-                                <p>Last updated: <?php echo esc_html( date_i18n( 'j F Y, g:i a', filemtime( __FILE__ ) ) ); ?></p>
-                                <p class="fs-6 sm:fs-5 opacity-60">This is a simple staff directory template.</p>
-                            </div>
-                        </header>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Wrapper end -->
-
-        <div>
-        </div>
 
 <?php
 // SHAREPOINT - START
@@ -84,6 +63,7 @@ function get_staff_data() {
 $staff = get_staff_data();
 ?>
 
+
 <style>
     .staff-directory {
         width: 100%;
@@ -112,33 +92,61 @@ $staff = get_staff_data();
     }
 </style>
 
-<table class="staff-directory">
-    <thead>
-        <tr>
-            <th>Full Name</th>
-            <th>Job Title</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th>Department</th>
-            <th>Phone Number</th>
-            <th>Location</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if ( empty( $staff ) ) : ?>
-            <tr><td colspan="7">Staff data is currently unavailable.</td></tr>
-        <?php else : ?>
-            <?php foreach ( $staff as $person ) : ?>
-                <tr>
-                    <td><?php echo esc_html( $person['Full Name'] ?? '' ); ?></td>
-                    <td><?php echo esc_html( $person['Job Title'] ?? '' ); ?></td>
-                    <td><?php echo esc_html( $person['Email'] ?? '' ); ?></td>
-                    <td><?php echo esc_html( $person['Company'] ?? '' ); ?></td>
-                    <td><?php echo esc_html( $person['Department'] ?? '' ); ?></td>
-                    <td><?php echo esc_html( $person['Phone Number'] ?? '' ); ?></td>
-                    <td><?php echo esc_html( $person['Location'] ?? '' ); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </tbody>
-</table>
+ <!-- Wrapper start -->
+        <div id="wrapper" class="wrap overflow-hidden-x">
+            <div class="section py-4 lg:py-6 xl:py-8">
+                <div class="container max-w-lg">
+                    <div class="panel vstack gap-4 lg:gap-6 xl:gap-8">
+                        <header class="shop-header panel vstack justify-center gap-2 lg:gap-4 text-center">
+                            <div class="panel">
+                                <h1 class="h3 lg:h1">Staff Directory 1 Template</h1>
+                                <p>Last updated: <?php echo esc_html( date_i18n( 'j F Y, g:i a', filemtime( __FILE__ ) ) ); ?></p>
+                                <p class="fs-6 sm:fs-5 opacity-60">This is a simple staff directory template.</p>
+                            </div>
+                        </header>
+                    </div>
+                </div>
+                <div class="container max-w-lg">
+                    <!-- table to be here -->
+                     <table class="staff-directory">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Company</th>
+                                <th>Job Title</th>
+                                <th>Department</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if ( empty( $staff ) ) : ?>
+                                <tr><td colspan="7">Staff data is currently unavailable.</td></tr>
+                            <?php else : ?>
+                                <?php foreach ( $staff as $person ) : ?>
+                                    <tr>
+                                        <td><?php echo esc_html( $person['Full Name'] ?? '' ); ?></td>
+                                        <td><?php echo esc_html( $person['Company'] ?? '' ); ?></td>
+                                        <td><?php echo esc_html( $person['Job Title'] ?? '' ); ?></td>
+                                        <td><?php echo esc_html( $person['Department'] ?? '' ); ?></td>
+                                        <td><?php echo esc_html( $person['Email'] ?? '' ); ?></td>
+                                        <td><?php echo esc_html( $person['Phone Number'] ?? '' ); ?></td>
+                                        <td><?php echo esc_html( $person['Location'] ?? '' ); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Wrapper end -->
+
+        <div>
+        </div>
+
+
