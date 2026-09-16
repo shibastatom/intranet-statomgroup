@@ -96,6 +96,22 @@ $staff = get_staff_data();
     .staff-directory tbody tr:hover {
         background-color: #f0f4ff;
     }
+
+    .staff-directory-search {
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.95rem;
+        color: white;
+        background-color: rgba(25, 25, 25, 0.9);
+        border: 1px solid #444;
+        border-radius: 4px;
+    }
+
+    .staff-directory-search::placeholder {
+        color: #aaa;
+    }
 </style>
 
  <!-- Wrapper start -->
@@ -113,8 +129,17 @@ $staff = get_staff_data();
                     </div>
                 </div>
                 <div class="container max-w-lg">
+                    <input
+                        type="text"
+                        id="staff-directory-search"
+                        class="staff-directory-search"
+                        placeholder="Search staff..."
+                        aria-label="Search staff directory"
+                    >
+
                     <!-- table to be here -->
-                    <table 
+                    <table
+                    id="staff-directory-table"
                     class="staff-directory table align-middle overflow-auto m-0 fs-6 dark:text-white dark:border-gray-700"
                     >
                         <thead class="sticky-top ft-secondary bg-black text-yellow z-1">
@@ -144,15 +169,51 @@ $staff = get_staff_data();
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
+                            <tr id="staff-directory-no-results" hidden>
+                                <td colspan="7">No staff match your search.</td>
+                            </tr>
                         </tbody>
                     </table>
 
-                    
+
                 </div>
             </div>
         </div>
 
         <!-- Wrapper end -->
+
+        <script>
+        (function () {
+            var searchInput = document.getElementById( 'staff-directory-search' );
+            var table = document.getElementById( 'staff-directory-table' );
+            if ( ! searchInput || ! table ) {
+                return;
+            }
+
+            var noResultsRow = document.getElementById( 'staff-directory-no-results' );
+            var rows = Array.prototype.filter.call(
+                table.querySelectorAll( 'tbody tr' ),
+                function ( row ) { return row !== noResultsRow; }
+            );
+
+            searchInput.addEventListener( 'input', function () {
+                var query = searchInput.value.trim().toLowerCase();
+                var visibleCount = 0;
+
+                rows.forEach( function ( row ) {
+                    var matches = row.textContent.toLowerCase().indexOf( query ) !== -1;
+                    row.hidden = ! matches;
+                    if ( matches ) {
+                        visibleCount++;
+                    }
+                } );
+
+                if ( noResultsRow ) {
+                    noResultsRow.hidden = visibleCount !== 0;
+                }
+            } );
+        })();
+        </script>
 
         <div>
         </div>
