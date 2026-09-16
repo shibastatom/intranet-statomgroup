@@ -93,11 +93,14 @@ $staff_locations   = get_staff_filter_options( $staff, 'Location' );
     .staff-directory thead th {
         /* background-color: #f3f3f3; */
         font-weight: 600;
+        text-tranmsform: uppercase;
+        font-size: 1.05rem;
+        
     }
 
     .staff-directory tbody tr {
         /* background-color: lightblue; */
-        background-color: rgba(25, 25, 25, 0.9);
+        background-color: rgba(25, 25, 25, 0.95);
     }
     .staff-directory tbody tr:nth-child(even) {
         /* background-color: #191919; */
@@ -105,7 +108,9 @@ $staff_locations   = get_staff_filter_options( $staff, 'Location' );
     }
 
     .staff-directory tbody tr:hover {
-        background-color: #f0f4ff;
+        /* background-color: #f0f4ff; */
+        background-color: #FAA501;
+        color: black;
     }
 
     .staff-directory-search {
@@ -132,12 +137,19 @@ $staff_locations   = get_staff_filter_options( $staff, 'Location' );
     }
 
     .staff-directory-filters select {
-        padding: 0.5rem 0.9rem;
+        padding: 10px 20px;
         font-size: 0.95rem;
         color: white;
         background-color: rgba(25, 25, 25, 0.9);
         border: 1px solid #444;
         border-radius: 4px;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+    .staff-directory-filters select:hover {
+        background-color: #FAA501;
     }
 </style>
 
