@@ -23,7 +23,13 @@ function get_staff_data() {
         return $cached;
     }
 
+    $staff_directory_csv_file = get_field('general_web_content', 'option')['staff_directory_csv_file'] ?? null;
+    $staff_directory_csv_file_url = '';
+    if ($staff_directory_csv_file) {
+        $staff_directory_csv_file_url = is_array($staff_directory_csv_file) ? $staff_directory_csv_file['url'] : $staff_directory_csv_file;
+    }
     $csv_url = 'https://intranet.statomgroup.co.uk/wp-content/uploads/2026/09/Staff-Directory-1.csv'; // replace with your actual link
+    $csv_url = $staff_directory_csv_file_url;
 
     $response = wp_remote_get( $csv_url, [ 'timeout' => 10 ] );
 
